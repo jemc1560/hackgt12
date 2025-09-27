@@ -1,38 +1,37 @@
 {
-    "name": "TruthLens",
-    "version": "0.1.0",
-    "description": "fact-checking misinformation",
-    "permissions": ["storage","activeTab"],
-    "host_permissions": ["change"],
-    "background": {
-      "service_worker": "background.js"
+  "name": "TruthLens",
+  "version": "0.1.0",
+  "description": "fact-checking misinformation",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/bookmark.png",
+        "assets/play.png",
+        "assets/delete.png",
+        "assets/save.png"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
     },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["contentScript.js"]
-      }
-    ],
-    "web_accessible_resources": [
-      {
-        "resources": [
-          "assets/bookmark.png",
-          "assets/play.png",
-          "assets/delete.png",
-          "assets/save.png"
-        ],
-        "matches": ["<all_urls>"]
-      }
-    ],
-   
-    "action": {
-      "default_icon": {
-        "16": "assets/ext-icon.png",
-        "24": "assets/ext-icon.png",
-        "32": "assets/ext-icon.png"
-      },
-      "default_title": "TruthLens",
-      "default_popup": "popup.html"
-    },
-    "manifest_version": 3
+    "default_title": "TruthLens",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 3
 }
