@@ -2,8 +2,8 @@
     "name": "TruthLens",
     "version": "0.1.0",
     "description": "fact-checking misinformation",
-    "permissions": ["storage","activeTab"],
-    "host_permissions": ["change"],
+    "permissions": ["storage","activeTab", "scripting"],
+    "host_permissions": ["<all_urls"],
     "background": {
       "service_worker": "background.js"
     },
