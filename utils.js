@@ -1,4 +1,6 @@
-import { GEMINI_API_KEY } from "./config.js";
+import { config } from "./config.js";
+
+const GEMINI_API_KEY = config.GEMINI_API_KEY;
 
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
 
