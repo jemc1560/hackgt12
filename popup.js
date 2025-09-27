@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return; 
     }
 
-    submitButton.addEventListener('click', () => {
+    submitButton.addEventListener('click', async () => {
         const quote = quoteInput.value.trim();
-        let summaryText = null;
         
         resultArea.innerHTML = "Searching for the truth...";
         submitButton.disabled = true;
 
-        summaryText = generateText(quote);
+        const summaryText = await generateText(quote);
+
         resultArea.innerHTML = summaryText;
         console.log("Generate Text: ", summaryText);
         console.log("\n");
