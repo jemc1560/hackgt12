@@ -6,7 +6,7 @@
     "host_permissions": ["<all_urls>"],
     "background": {
       "service_worker": "background.js",
-      "type": "model"
+      "type": "module"
     },
     "content_scripts": [
       {
