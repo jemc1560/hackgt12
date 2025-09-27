@@ -1,4 +1,6 @@
-// document.addEventListener('DOMContentLoaded', () => {
+console.log("Content script loaded");
+
+document.addEventListener('DOMContentLoaded', () => {
     const submitButton = document.getElementById('verify-button');
     const quoteInput = document.getElementById('quote-input');
     const resultArea = document.getElementById('result-area');
@@ -16,4 +18,4 @@
         console.log("Verifying quote:", quote);
     });
 
-// });
+});
