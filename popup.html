@@ -2,16 +2,21 @@
 <script type="module" src="popup.js"></script>
 
 <div class="container">
-  <div>
-    <div class="title">Truth-Lens</div>
-
-    <div class="content" id="h1"></div>
+  <div id = "header" >
+      <div class="title" style="align-self: center;">Truth-Lens</div>
+      <button style="border-style: none; padding: 0px; background-color: none;align-self:flex-start;"><img id= "exitButton"src ="assets/exit-icon.png"></button>
+    </div>
+  <div id="body">
+    
+    
 
     <textarea
       id="quote-input"
+      style="width: 250px;"
       placeholder="Paste the quote you want to verify"
       rows="5"
     ></textarea>
+    <br>
     <button id="verify-button">Verify</button>
 
     <div id="result-area" style="margin-top: 15px;"></div>

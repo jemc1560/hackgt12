@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = document.getElementById('verify-button');
     const quoteInput = document.getElementById('quote-input');
     const resultArea = document.getElementById('result-area');
+    const exitButton = document.getElementById('exitButton');
+    exitButton.addEventListener('click', () => {
+        window.close();
+    });
 
     submitButton.addEventListener('click', () => {
         const quote = quoteInput.value.trim();

@@ -1,26 +1,59 @@
 .container {
-  width: 280px;
-  color: #979FBE;
-  border-radius: 12px;
+  display: block;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  
+}
+#exitButton {
+  width: 16px;
+  height: 16px;
+}
+#body {
+  margin-right: 50px;
 }
 
 .title {
-  font-size: 14px;
-  font-family: 'Jost',  monospace;
+  font-size: 24px;
+  font-family: "Lucida Console",  monospace;
   font-weight: bold;
-  padding: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+  color: #49537a;
 }
 
 .textbox {
   width: 100%;
-  font-size: 12px;
+  font-size: 16px;
   margin: 0;
   padding: 0px 2px;
 }
+#header {
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
 
-.textbox:focus {
+#verify-button:hover {
   outline: 0;
-  border-color: #8692c2;
+  background-color: #2f354b;
+  
+}
+#verify-button {
+  margin-top: 12px;
+  align-self: center;
+  border-radius: 10px;
+  background-color:  #979FBE;
+  color: #ffffff;
+  font-weight: bold;
+  
+}
+#quote-input {
+  align-self: center;
+  height: 65px;
 }
 
 
