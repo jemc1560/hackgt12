@@ -1,0 +1,27 @@
+.container {
+  width: 280px;
+  color: #979FBE;
+  border-radius: 12px;
+}
+
+.title {
+  font-size: 14px;
+  font-family: 'Jost',  monospace;
+  font-weight: bold;
+  padding: 8px;
+}
+
+.textbox {
+  width: 100%;
+  font-size: 12px;
+  margin: 0;
+  padding: 0px 2px;
+}
+
+.textbox:focus {
+  outline: 0;
+  border-color: #8692c2;
+}
+
+
+
