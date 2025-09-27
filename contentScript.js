@@ -1,21 +1,17 @@
-console.log("Content script loaded");
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (tab?.url && tab.url.includes(" ")) {
+    const queryParameters = tab.url.split("?")[1];
+    const urlParameters = new URLSearchParams(queryParameters);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const submitButton = document.getElementById('verify-button');
-    const quoteInput = document.getElementById('quote-input');
-    const resultArea = document.getElementById('result-area');
-
-    if (!submitButton || !quoteInput || !resultArea) {
-        console.error("One or more required modal elements were not found.");
-        return; 
-    }
-
-    submitButton.addEventListener('click', () => {
-        const quote = quoteInput.value.trim();
-        
-        resultArea.innerHTML = "Searching for the truth...";
-        submitButton.disabled = true;
-        console.log("Verifying quote:", quote);
+    chrome.tabs.sendMessage(tabId, {
+      type: "NEW",
+      videoId: urlParameters.get("v"),
     });
+  }
+});
 
+chrome.action.onClicked.addListener((tab) => {
+  chrome.action.setBadgeText({ text: "ON" });
+  chrome.action.setBadgeBackgroundColor({ color: "#444a63ff" });
+  chrome.action.setTitle({ tabId: tab.id, title: `You are on tab: ${tab.id}` });
 });

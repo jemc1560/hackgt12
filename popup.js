@@ -1,3 +1,5 @@
+import {generateText} from './utils.js';
+
 console.log("Content script loaded");
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,9 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     submitButton.addEventListener('click', () => {
         const quote = quoteInput.value.trim();
+        let summaryText = null;
         
         resultArea.innerHTML = "Searching for the truth...";
         submitButton.disabled = true;
+
+        summaryText = generateText(quote);
+        resultArea.innerHTML = summaryText;
+        console.log("Generate Text: ", summaryText);
+        console.log("\n");
         console.log("Verifying quote:", quote);
     });
 
