@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
         resultArea.innerHTML = "Searching for the truth...";
         submitButton.disabled = true;
 
-        const summaryText = await generateText(quote);
+        // const summaryText = await generateText(quote);
 
-        resultArea.innerHTML = summaryText;
-        console.log("Generate Text: ", summaryText);
+        // resultArea.innerHTML = summaryText;
+        // console.log("Generate Text: ", summaryText);
         console.log("\n");
         console.log("Verifying quote:", quote);
 

@@ -1,5 +1,5 @@
 import { config } from "./config.js";
-import { rankAndSelectBestSources } from "./utils.js";
+import { generateText, rankAndSelectBestSources } from "./utils.js";
 const GOOGLE_API_KEY = config.GOOGLE_API_KEY;
 const SEARCH_ENGINE_ID_BROAD = config.SEARCH_ENGINE_ID_BROAD;
 const SEARCH_ENGINE_ID_SPECIFIC = config.SEARCH_ENGINE_ID_SPECIFIC;
@@ -77,6 +77,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       // rank and select best credible sources (using gemini)
       if (allSearchResults.length > 0) {
         const bestCredibleSources = await rankAndSelectBestSources(message.quote, allSearchResults);
+        generateText(message, bestCredibleSources);
         sendResponse({ result: "success", sources: bestCredibleSources });
       } else {
         sendResponse({ result: "error", message: "No search results found." });
@@ -84,6 +85,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     };
 
     performAnalysis();
+    
     return true;
   }
   

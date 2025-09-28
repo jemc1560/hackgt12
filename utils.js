@@ -30,9 +30,10 @@ async function generateContentREST(modelName, body) {
 }
 
 // takes in a prompt and outputs text from Gemini
-export async function generateText(prompt, opts = {}) {
+export async function generateText(prompt, bestCredSrc, opts = {}) {
   const modelName = opts.model || "gemini-2.0-flash";
-  const finalPrompt = `I am curious about this quote: "${prompt}" Please explain the context, what happened, and provide balanced, verifiable details.`;
+  const sources = bestCredSrc.supportingSources;
+  const finalPrompt = `I am curious about this quote: "${prompt}" Please explain the context, what happened, and provide balanced, verifiable details. Only use these sources to compile your summary: ${sources} and keep your response to a maximum of 150.`;
   const data = await generateContentREST(modelName, {
     contents: [{ role: "user", parts: [{ text: finalPrompt }]}],
   });
@@ -146,7 +147,7 @@ export async function rankAndSelectBestSources(userQuote, searchResults, opts = 
         const result = JSON.parse(jsonString);
 
         console.log("best results:", result);
-        return result.supportingSources || [];
+        return result || [];
 
     } catch (error) {
         console.error("Error parsing JSON response from Gemini:", error);
