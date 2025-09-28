@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     response.sources.forEach(source => {
                         const sourceTitle = source.title || "Source #" + source.rank; // fallback if title is missing
-                        
+
                         finalHTML += `
                             <div class="source-contain">
                                 <a href="${source.source}" target="_blank">
@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     
                     finalHTML += `</ul>`;
+                } else {
+                    finalHTML += `<p class="no-sources-message">No supporting sources were found for this analysis.</p>`;
                 }
 
                 resultArea.innerHTML = finalHTML;

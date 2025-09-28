@@ -128,6 +128,7 @@ export async function rankAndSelectBestSources(userQuote, searchResults, opts = 
                 {
                     "rank": 1,
                     "source": "The original URL of the best source.",
+                    "title": "The original title of the source.",
                     "reasoning": "A brief explanation of why this source is relevant and credible."
                 }
             ]
