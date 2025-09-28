@@ -1,8 +1,8 @@
 import { config } from "./config.js";
-
+import { isInformative } from "./utils.js";
 const GOOGLE_API_KEY = config.GOOGLE_API_KEY;
 const SEARCH_ENGINE_ID_BROAD = config.SEARCH_ENGINE_ID_BROAD;
-const SEARCH_ENGINE_ID_SPECIFIC = config.SEARCH_ENGINE_ID;
+const SEARCH_ENGINE_ID_SPECIFIC = config.SEARCH_ENGINE_ID_SPECIFIC;
 
 async function verifyQuote(quote, engineId, numEntries) {
   const query = encodeURIComponent(quote);
@@ -12,6 +12,7 @@ async function verifyQuote(quote, engineId, numEntries) {
     const response = await fetch(url); 
     if (!response.ok) {
       console.error("API request failed:", response.status, response.statusText);
+      console.log("URL: ", url);
       return { result: "error", message: "API request failed"};
     }
 
@@ -20,6 +21,16 @@ async function verifyQuote(quote, engineId, numEntries) {
       return { result: "error", message: "No results found"};
     } else {
       console.log("Found results:", data.items);
+      console.log(data.items[0].link);
+      // const trueSrcs = [];
+      // for (let i = 0; i < data.items.length; i++) {
+      //   if (isInformative(data.items[i].link) === "true") {
+
+      //   }
+        
+      // }
+      
+
       return { result: "success", items: data.items };
     } 
   } catch (error) {

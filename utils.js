@@ -2,6 +2,7 @@ import { config } from "./config.js";
 
 const GEMINI_API_KEY = config.GEMINI_API_KEY;
 
+
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta";
 
 function requireKey() {
@@ -37,3 +38,19 @@ export async function generateText(prompt, opts = {}) {
   if (!text) throw new Error("No text returned from Gemini");
   return text;
 }
+
+// takes in a source (link) and outputs True/False depending on whether the source is biased 
+export async function isInformative(source, opts = {}) {
+  console.log("checking the following source:", source);
+  const modelName = opts.model || "gemini-2.0-flash";
+  const respond = `Here is a source website: "${source}" Please evauluate if the source is purely informational. If the source contains biased language, then reply with "false". If the source is informative, then reply with "true". If the source comes from social media domains such as facebook, snapchat, twitter, instagram, X, etc., then assume "false"`;
+  const data = await generateContentREST(modelName, {
+    contents: [{ role: "user", parts: [{ text: respond }]}],
+  });
+  const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join("") || "";
+  if (!text) throw new Error("No text returned from Gemini");
+
+  console.log(`source: ${source}, isBiased? ${text}`);
+  return text;
+}
+
