@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitButton = document.getElementById('verify-button');
     const quoteInput = document.getElementById('quote-input');
     const resultArea = document.getElementById('result-area');
+    const exitButton = document.getElementById('exitButton');
+    exitButton.addEventListener('click', () => {
+        window.close();
+    });
 
     if (!submitButton || !quoteInput || !resultArea) {
         console.error("One or more required modal elements were not found.");
