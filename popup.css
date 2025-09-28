@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
+  border-radius: 15px;
   
 }
 #exitButton {
@@ -37,19 +38,21 @@
   align-items: center;
 }
 
-#verify-button:hover {
+.button:hover {
   outline: 0;
-  background-color: #2f354b;
+  background-color: #394779;
   
 }
 #verify-button {
   margin-top: 12px;
   align-self: center;
-  border-radius: 10px;
+  
+}
+.button {
+   border-radius: 10px;
   background-color:  #979FBE;
   color: #ffffff;
   font-weight: bold;
-  
 }
 #quote-input {
   align-self: center;
