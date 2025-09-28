@@ -2,7 +2,7 @@ import { config } from "./config.js";
 
 const GOOGLE_API_KEY = config.GOOGLE_API_KEY;
 const SEARCH_ENGINE_ID_BROAD = config.SEARCH_ENGINE_ID_BROAD;
-const SEARCH_ENGINE_ID_SPECIFIC = config.SEARCH_ENGINE_ID;
+const SEARCH_ENGINE_ID_SPECIFIC = config.SEARCH_ENGINE_ID_SPECIFIC;
 
 async function verifyQuote(quote, engineId, numEntries) {
   const query = encodeURIComponent(quote);
