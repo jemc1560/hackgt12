@@ -76,7 +76,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       // rank and select best credible sources (using gemini)
       if (allSearchResults.length > 0) {
-        const bestCredibleSources = await rankAndSelectBestSources(allSearchResults);
+        const bestCredibleSources = await rankAndSelectBestSources(message.quote, allSearchResults);
         sendResponse({ result: "success", sources: bestCredibleSources });
       } else {
         sendResponse({ result: "error", message: "No search results found." });
