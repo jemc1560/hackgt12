@@ -30,16 +30,34 @@ async function generateContentREST(modelName, body) {
 }
 
 // takes in a prompt and outputs text from Gemini
-export async function generateText(prompt, bestCredSrc, opts = {}) {
+export async function generateText(userPrompt, analysisObject, opts = {}) {
   const modelName = opts.model || "gemini-2.0-flash";
-  const sources = bestCredSrc.supportingSources;
-  const finalPrompt = `I am curious about this quote: "${prompt}" Please explain the context, what happened, and provide balanced, verifiable details. Only use these sources to compile your summary: ${sources} and keep your response to a maximum of 150.`;
+  const verdict = analysisObject.finalVerdict;
+  const reasoning = analysisObject.finalVerdict.summary; 
+
+  const finalPrompt = `
+    You are a helpful analyst that writes clear and concise summaries. 
+    Based on the following pre-conducted analysis, write a friendly, easy-to-read summary paragraph for an end-user.
+
+    - The summary should be a maximum of 200 words and should include the quote claim: "${analysisObject.quoteClaim}"
+    - The summary should be objective and unbiased.
+    - Start by stating the verdict on the user's quote.
+    - Then, incorporate the key reasoning.
+    - Do not sound robotic; write in a natural, informative tone.
+
+    Here is the analysis to summarize:
+    - User's Quote: "${userPrompt}"
+    - Verdict: "${verdict}"
+    - Key Reasoning: "${reasoning}"
+  `;
+
   const data = await generateContentREST(modelName, {
     contents: [{ role: "user", parts: [{ text: finalPrompt }]}],
   });
   const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).filter(Boolean).join("") || "";
   if (!text) throw new Error("No text returned from Gemini");
-  return text;
+  
+  return text.trim();
 }
 
 // // takes in a source (link) and outputs True/False depending on whether the source is biased 

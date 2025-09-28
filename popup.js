@@ -34,19 +34,36 @@ document.addEventListener('DOMContentLoaded', () => {
             action: 'detectMisinformation',
             quote: quote
         }, (response) => {
-            submitButton.disabled = false;
-            if (chrome.runtime.lastError) {
-                console.error("ERROR sending message:", chrome.runtime.lastError);
-                resultArea.innerHTML = '<span style="color: red;">ERROR: Could not communicate with the extension background.</span>';
-                return; 
-            }
+            if (response && response.result === 'success') {
+                let finalHTML = `
+                    <div class="verdict">${response.verdict}</div>
+                    <div class="summary">${response.summary}</div>
+                `;
 
-            // display the result from the backend 
-            if (response && response.result === "success") {
-                resultArea.innerHTML = '<span style="color: green;">SUCCESS: The quote is verified.</span>';
+                // check if the sources array exists 
+                if (response.sources && response.sources.length > 0) {
+                    finalHTML += `<h4>Key Sources:</h4><ul class="source-list">`;
+                    
+                    response.sources.forEach(source => {
+                        finalHTML += `
+                            <li>
+                                <a href="${source.source}" target="_blank" title="${source.source}">
+                                    Source #${source.rank}
+                                </a>
+                                <p class="reasoning">${source.reasoning}</p>
+                            </li>
+                        `;
+                    });
+                    
+                    finalHTML += `</ul>`;
+                }
+
+                resultArea.innerHTML = finalHTML;
             } else {
-                resultArea.innerHTML = '<span style="color: red;">ERROR: The quote could not be verified.</span>';
+                resultArea.innerHTML = `<span style="color: red;">Analysis failed: ${response.message}</span>`;
             }
+            submitButton.disabled = false;
+            
         });
     });
 

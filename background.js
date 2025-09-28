@@ -76,9 +76,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       // rank and select best credible sources (using gemini)
       if (allSearchResults.length > 0) {
-        const bestCredibleSources = await rankAndSelectBestSources(message.quote, allSearchResults);
-        generateText(message, bestCredibleSources);
-        sendResponse({ result: "success", sources: bestCredibleSources });
+        const analysisObject = await rankAndSelectBestSources(message.quote, allSearchResults);
+        if (analysisObject && analysisObject.finalVerdict) {
+        const userSummary = await generateText(message.quote, analysisObject);
+        
+        sendResponse({
+          result: "success",
+          verdict: analysisObject.finalVerdict.verdict,
+          summary: userSummary, 
+          sources: analysisObject.supportingSources
+        });
+      } else {
+        sendResponse({ result: "error", message: "Could not complete the analysis." });
+      }
       } else {
         sendResponse({ result: "error", message: "No search results found." });
       }
@@ -88,5 +98,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     
     return true;
   }
-  
 });
