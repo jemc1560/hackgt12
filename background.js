@@ -58,4 +58,5 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     fetchAllSources(message.quote).then(sendResponse);
     return true; 
   }
+  
 });
