@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: 8px;
+  border-radius: 15px;
   
 }
 #exitButton {
@@ -37,24 +38,51 @@
   align-items: center;
 }
 
-#verify-button:hover {
+.button:hover {
   outline: 0;
-  background-color: #2f354b;
+  background-color: #394779;
   
 }
 #verify-button {
   margin-top: 12px;
   align-self: center;
-  border-radius: 10px;
+  
+}
+.button {
+   border-radius: 10px;
   background-color:  #979FBE;
   color: #ffffff;
   font-weight: bold;
-  
 }
 #quote-input {
   align-self: center;
   height: 65px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
+.source-contain {
+  margin: 4px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+.source-contain:hover{
+  background-color:#49537a;
+  color: #ffffff;
+}
+.headline{
+  display: inline;
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: "Lucida Console",  monospace;
+
+}
 
 
