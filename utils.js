@@ -44,6 +44,7 @@ export async function generateText(userPrompt, analysisObject, opts = {}) {
     - Start by stating the verdict on the user's quote.
     - Then, incorporate the key reasoning.
     - Do not sound robotic; write in a natural, informative tone.
+    - Do not tell the user "here's a friendly summary..." just provide the summary directly.
 
     Here is the analysis to summarize:
     - User's Quote: "${userPrompt}"
