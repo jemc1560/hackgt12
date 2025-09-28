@@ -22,11 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resultArea.innerHTML = "Searching for the truth...";
         submitButton.disabled = true;
 
-        // const summaryText = await generateText(quote);
-
-        // resultArea.innerHTML = summaryText;
-        // console.log("Generate Text: ", summaryText);
-        console.log("\n");
         console.log("Verifying quote:", quote);
 
         // send quote to the background script 
@@ -42,16 +37,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // check if the sources array exists 
                 if (response.sources && response.sources.length > 0) {
-                    finalHTML += `<h4>Key Sources:</h4><ul class="source-list">`;
+                    finalHTML += `<h4>Key Sources:</h4>`;
                     
                     response.sources.forEach(source => {
+                        const sourceTitle = source.title || "Source #" + source.rank; // fallback if title is missing
+                        
                         finalHTML += `
-                            <li>
-                                <a href="${source.source}" target="_blank" title="${source.source}">
-                                    Source #${source.rank}
+                            <div class="source-contain">
+                                <a href="${source.source}" target="_blank">
+                                    <div class="headline">${sourceTitle}</div>
                                 </a>
-                                <p class="reasoning">${source.reasoning}</p>
-                            </li>
+                                    <p class="reasoning">${source.reasoning}</p>
+                            </div>
                         `;
                     });
                     
